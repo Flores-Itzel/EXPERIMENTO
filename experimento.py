@@ -1,21 +1,20 @@
-# experimento.py
-# Ejecuta MD, MN y QS en cada conjunto de datos y guarda los tiempos en resultados.csv
-#   python experimento.py            -> corre los 15 conjuntos (A1..C5)
-#   python experimento.py A          -> solo los conjuntos A1..A5
-#   python experimento.py B3 C1      -> solo B3 y C1
-#   python experimento.py prueba     -> usa la carpeta "datos_prueba" (para probar)
 import csv
 import gc
 import os
 import sys
 import time
 
-from algoritmos import merge_sort_directa, mezcla_natural, quicksort
+from algoritmos import merge_sort, mezcla_natural, quick_sort
+
+
+def quicksort(lista):
+    quick_sort(lista, 0, len(lista) - 1)      # quick_sort pide izquierda y derecha
+
 
 PRUEBA = "prueba" in sys.argv
 CARPETA = "datos_prueba" if PRUEBA else "datos"
 ARCHIVO = "resultados_prueba.csv" if PRUEBA else "resultados.csv"
-ALGORITMOS = [("MD", merge_sort_directa), ("MN", mezcla_natural), ("QS", quicksort)]
+ALGORITMOS = [("MD", merge_sort), ("MN", mezcla_natural), ("QS", quicksort)]
 TAMANO = {"A": "1 millón", "B": "5 millones", "C": "10 millones"}
 
 pedidos = [a.upper() for a in sys.argv[1:] if a != "prueba"]
